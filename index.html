@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lust's page</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap" rel="stylesheet">
+<style>
+body {
+  margin: 0;
+  background: black;
+  color: white;
+  font-family: 'Syne', sans-serif;
+  text-align: center;
+  overflow: hidden;
+}
+.splat {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#gnorp { background: black; z-index: 4; cursor: pointer; font-size: max(14px, 1.2vw); color: rgba(255, 255, 255, 0.35); }
+#splunge { background: black; z-index: 3; font-size: 5vw; }
+#kablorp { background: white; opacity: 0; z-index: 5; pointer-events: none; }
+#bonk { padding: 20vh 10vw; }
+h1 { font-size: 10vw; margin: 0 0 15vh; }
+p { font-size: 5vw; margin: 0 0 5vh; }
+img { max-width: 60vw; margin-bottom: 20vh; }
+#wiggler { cursor: pointer; }
+#shhhmoo { font-size: 12px; margin: 30vh 0 0; color: black; }
+</style>
+</head>
+<body>
+
+<div id="gnorp" class="splat">click on me, pwetty plese :3</div>
+<div id="splunge" class="splat"><span id="flibber"></span></div>
+<div id="kablorp" class="splat"></div>
+
+<main id="bonk">
+  <h1>Info</h1>
+  <p>Scroll down</p>
+
+  <img id="wiggler" src="gif1.gif">
+
+  <p>TExt. Text. Text. bottom text</p>
+  <p>second botton of text and </p>
+
+  <img src="gif2.gif">
+
+  <p>the end</p>
+
+  <p id="shhhmoo"></p>
+</main>
+
+<script>
+var fizzlewump = [
+  { zonk: "music.mp3", blargh: 100 },
+  { zonk: "High.mp3", blargh: 10 },
+  { zonk: "BurgerSausce.mp3", blargh: 1 },
+  { zonk: "music2.mp3", blargh: 30 },
+  { zonk: "music3.mp3", blargh: 15 },
+  { zonk: "music4.mp3", blargh: 10 },
+  { zonk: "music5.mp3", blargh: 20 },
+  { zonk: "music6.mp3", blargh: 4 }
+];
+var wibble = 0;
+var glorp = 1;
+
+var boop = new Audio(fizzlewump[0].zonk);
+boop.currentTime = 22;
+boop.volume = 0;
+
+function snagglePick() {
+  var noodles = [];
+  for (var q = 1; q < fizzlewump.length; q++) {
+    if (q != wibble) noodles.push(q);
+  }
+  if (noodles.length == 0) return fizzlewump.length > 1 ? wibble : 0;
+
+  for (var flop = 0; flop < 100000; flop++) {
+    var plonked = noodles.filter(function (q) {
+      return Math.random() * 100 < fizzlewump[q].blargh;
+    });
+    if (plonked.length) return plonked[Math.floor(Math.random() * plonked.length)];
+  }
+  return noodles[0];
+}
+
+function swapBoop() {
+  wibble = snagglePick();
+  boop.volume = 0;
+  boop.src = fizzlewump[wibble].zonk;
+  boop.currentTime = wibble == 0 ? 22 : 0;
+  boop.play();
+}
+boop.addEventListener("ended", swapBoop);
+wiggler.addEventListener("click", swapBoop);
+
+setInterval(function () {
+  if (!boop.duration) return;
+  var zib = wibble == 0 ? 22 : 0;
+  var zab = wibble == 0 ? 0.5 : 2;
+  var zub = Math.min(1, (boop.currentTime - zib) / zab, (boop.duration - boop.currentTime) / 2);
+  boop.volume = Math.max(0, glorp * zub);
+}, 50);
+
+gnorp.addEventListener("click", function () {
+  gnorp.remove();
+  boop.play();
+  setTimeout(blurtLetters, 300);
+});
+
+function blurtLetters() {
+  var chunks = ["FRA", "CTA", "LU", "ST"];
+  var k = 0;
+  var tock = setInterval(function () {
+    flibber.textContent += chunks[k];
+    k++;
+    if (k == chunks.length) {
+      clearInterval(tock);
+      setTimeout(kaboinkle, 170);
+    }
+  }, 150);
+}
+
+function kaboinkle() {
+  kablorp.style.opacity = 1;
+  splunge.remove();
+  document.body.style.overflow = "auto";
+  setTimeout(function () {
+    kablorp.style.transition = "opacity 2.5s";
+    kablorp.style.opacity = 0;
+  }, 50);
+  shhhhh();
+}
+
+function shhhhh() {
+  var tock = setInterval(function () {
+    glorp = Math.max(0.6, glorp - 0.02);
+    if (glorp <= 0.6) clearInterval(tock);
+  }, 100);
+}
+
+var zorbDay = new Date("2029-09-24T20:22:18Z").getTime();
+function tickyTonk() {
+  var grab = getSelection();
+  var grabbed = shhhmoo.contains(grab.anchorNode) || shhhmoo.contains(grab.focusNode);
+  var bleep = Math.max(0, Math.floor((zorbDay - Date.now()) / 1000));
+  shhhmoo.textContent = "The Pact is coming out soon... (" +
+    Math.floor(bleep / 86400) + " days; " +
+    Math.floor(bleep % 86400 / 3600) + " hours; " +
+    Math.floor(bleep % 3600 / 60) + " minutes; " +
+    bleep % 60 + " seconds left)";
+  if (grabbed) grab.selectAllChildren(shhhmoo);
+}
+tickyTonk();
+setInterval(tickyTonk, 1000);
+</script>
+</body>
+</html>
