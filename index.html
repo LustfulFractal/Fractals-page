@@ -8,7 +8,7 @@
 <style>
 body { margin: 0; background: black; color: white; font-family: 'Space Grotesk', sans-serif; text-align: center; overflow: hidden; }
 .splat { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
-#gnorp { background: black; z-index: 4; cursor: pointer; font-size: max(14px, 1.2vw); color: rgba(255, 255, 255, 0.35); }
+#gnorp { background: black; z-index: 4; font-size: max(14px, 1.2vw); color: rgba(255, 255, 255, 0.35); }
 #splunge { background: black; z-index: 3; font-size: 5vw; }
 #kablorp { background: white; opacity: 0; z-index: 5; pointer-events: none; }
 #bonk { padding: 20vh 10vw; }
@@ -22,7 +22,7 @@ img { max-width: 60vw; margin-bottom: 15vh; }
 </head>
 <body>
 
-<div id="gnorp" class="splat">click on me, pwetty plese :3</div>
+<div id="gnorp" class="splat"></div>
 <div id="splunge" class="splat"><span id="flibber"></span></div>
 <div id="kablorp" class="splat"></div>
 
@@ -76,15 +76,32 @@ var fizzlewump = [
   { zonk: "Devastation.mp3", blargh: 3, gurp: 0.6 }
 ];
 var wibble = 0, glorp = 1;
-var boop = new Audio(fizzlewump[0].zonk);
-boop.currentTime = 22;
+var boop = new Audio();
 boop.volume = 0;
+boop.addEventListener("loadedmetadata", () => { boop.currentTime = wibble == 0 ? 22 : 0; });
+
+var yoink = a => a[Math.floor(Math.random() * a.length)];
+var loadyBits = ["loading my page...", "getting all songs ready...", "nah, I'd load.", "uhhh ohhh uhhh...", "wait for it...", "viruses? Nahhhh...", "WAIT...", "Uhhh... You need to wait a little less than for The Pact realese!..."];
+var clickyBits = ["click on me, pwetty plese :3", "TOUCH ME.", "press me.", "c'mon, click on me!", "do it. click.", "rub my fat belly.", "poke me :3"];
+var readyBit = yoink(clickyBits);
 
 var slopFonts = ["'Space Grotesk'", "'Syne'", "'Archivo Black'"];
-var blipFont = slopFonts[Math.floor(Math.random() * slopFonts.length)];
+var blipFont = yoink(slopFonts);
 
 gnorp.style.fontFamily = blipFont;
 splunge.style.fontFamily = blipFont;
+gnorp.textContent = yoink(loadyBits);
+
+var nomnom = 0;
+fizzlewump.forEach(s => {
+  fetch(s.zonk).then(r => r.blob()).then(b => { s.url = URL.createObjectURL(b); }).catch(() => { s.url = s.zonk; }).finally(() => {
+    if (++nomnom == fizzlewump.length) {
+      gnorp.textContent = readyBit;
+      gnorp.style.cursor = "pointer";
+      gnorp.addEventListener("click", kerplunk);
+    }
+  });
+});
 
 function snagglePick() {
   var noodles = [];
@@ -100,8 +117,7 @@ function snagglePick() {
 function swapBoop() {
   wibble = snagglePick();
   boop.volume = 0;
-  boop.src = fizzlewump[wibble].zonk;
-  boop.currentTime = wibble == 0 ? 22 : 0;
+  boop.src = fizzlewump[wibble].url;
   boop.play();
 }
 boop.addEventListener("ended", swapBoop);
@@ -114,9 +130,11 @@ setInterval(() => {
   boop.volume = Math.max(0, glorp * fizzlewump[wibble].gurp * zub);
 }, 50);
 
-gnorp.addEventListener("click", () => {
+function kerplunk() {
   gnorp.remove();
+  boop.src = fizzlewump[0].url;
   boop.play();
+  document.querySelectorAll("img").forEach(i => { i.src = i.getAttribute("src").split("?")[0] + "?" + Date.now(); });
   setTimeout(() => {
     var chunks = ["FRA", "CTA", "LU", "ST"], k = 0;
     var tock = setInterval(() => {
@@ -133,7 +151,7 @@ gnorp.addEventListener("click", () => {
       }
     }, 150);
   }, 300);
-});
+}
 
 var zorbDay = new Date("2029-09-24T20:22:18Z").getTime();
 setInterval(() => {
