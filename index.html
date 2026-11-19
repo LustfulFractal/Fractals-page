@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lust's page</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Syne:wght@800&family=Archivo+Black&family=Plus+Jakarta+Sans:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Syne:wght@800&family=Archivo+Black&display=swap" rel="stylesheet">
 <style>
 body { margin: 0; background: black; color: white; font-family: 'Space Grotesk', sans-serif; text-align: center; overflow: hidden; }
 .splat { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
@@ -17,7 +17,7 @@ p { font-size: 3vw; margin: 0 0 4vh; }
 img { max-width: 60vw; margin-bottom: 15vh; }
 #wiggler { cursor: pointer; }
 #shhhmoo { font-size: 12px; margin: 30vh 0 0; color: black; }
-#bonk h1, #bonk p, #bonk img:not(#wiggler) { display: block; width: fit-content; margin-left: auto; margin-right: auto; will-change: transform; }
+#bonk h1, #bonk p, #bonk img:not(#wiggler) { display: block; width: fit-content; margin-left: auto; margin-right: auto; }
 </style>
 </head>
 <body>
@@ -29,32 +29,32 @@ img { max-width: 60vw; margin-bottom: 15vh; }
 <main id="bonk">
   <h1>Biography</h1>
   <p>Scroll down (or press on mouse)</p>
-  <img id="wiggler" src="gif1.gif">
+  <img id="wiggler" data-g="gif1.gif">
   <h1>DNI:</h1>
   <p>Homophobiaphobia, Trans, hyper-religious people, any taboo subjects (e.g. pedophilia, terrorism supporters), "vibe-coders", misandrists/misogynists, racists (not people who just say "nga" as a joke, but those who genuinely hate Black people)…</p>
   <p>...</p>
   <p>Please be kind and <strong>BLOCK me IMMEDIATELY</strong> if anything on my DNI list applies to you. If you <strong>MISUNDERSTOOD</strong> the DNI list, <strong>ASK ME</strong> about it (and I suspect there will be a <strong>LOT</strong> of misunderstandings…).</p>
-  <img src="gif2.gif">
+  <img data-g="gif2.gif">
   <h1>RULES:</h1>
   <p>NSFW in DMs / servers / groups / demos = <strong>Block</strong>.<br>
   NSFW block is permanent for strangers, and lasts 1–10 hours for friends.<br>
   (Nudity, NSFW references, and indirect NSFW similarities are all included.)<br>
   No exceptions.</p>
-  <img src="gif3.gif">
+  <img data-g="gif3.gif">
   <h1>ABOUT ME:</h1>
   <p>I'm a game dev and a hobbyist painter. I love playing different games and creating things.</p>
-  <img src="gif4.gif">
+  <img data-g="gif4.gif">
   <h1>FANDOMS I'M IN:</h1>
   <p>JJBA, JJK, Dota 2, Deadlock, Roblox, GD, Balatro, ULTRAKILL, TBoI, "THE PACT", Grace, Nullscape.</p>
   <p>(Feel free to start a conversation about communities we both know!)</p>
-  <img src="gif5.gif">
+  <img data-g="gif5.gif">
   <h1>MUSIC I LISTEN TO:</h1>
   <p>Heaven Pierce Her, Phill C, CTD OST, Deadlock OST, TBoI OST, JJK OST, JJBA OST.</p>
   <p>(Feel free to start a conversation about music we both listen to.)</p>
-  <img src="gif6.gif">
+  <img data-g="gif6.gif">
   <p>...</p>
   <p>The end.</p>
-  <img src="gif7.gif">
+  <img data-g="gif7.gif">
   <p id="shhhmoo"></p>
 </main>
 
@@ -75,66 +75,67 @@ var fizzlewump = [
   { zonk: "Light.mp3", blargh: 5, gurp: 0.5 },
   { zonk: "Devastation.mp3", blargh: 3, gurp: 0.6 }
 ];
-var wibble = 0, glorp = 1;
-var boop = new Audio();
-boop.volume = 0;
-boop.addEventListener("loadedmetadata", () => { boop.currentTime = wibble == 0 ? 22 : 0; });
+fizzlewump.forEach(s => { s.url = s.zonk; });
 
 var yoink = a => a[Math.floor(Math.random() * a.length)];
 var loadyBits = ["loading my page...", "getting all songs ready...", "nah, I'd load.", "uhhh ohhh uhhh...", "wait for it...", "viruses? Nahhhh...", "WAIT...", "Uhhh... You need to wait a little less than for The Pact realese!..."];
 var clickyBits = ["click on me, pwetty plese :3", "TOUCH ME.", "press me.", "c'mon, click on me!", "do it. click.", "rub my fat belly.", "poke me :3"];
-var readyBit = yoink(clickyBits);
-
-var slopFonts = ["'Space Grotesk'", "'Syne'", "'Archivo Black'"];
-var blipFont = yoink(slopFonts);
-
-gnorp.style.fontFamily = blipFont;
-splunge.style.fontFamily = blipFont;
+var blipFont = yoink(["'Space Grotesk'", "'Syne'", "'Archivo Black'"]);
+gnorp.style.fontFamily = splunge.style.fontFamily = blipFont;
 gnorp.textContent = yoink(loadyBits);
 
-var nomnom = 0;
-fizzlewump.forEach(s => {
-  fetch(s.zonk).then(r => r.blob()).then(b => { s.url = URL.createObjectURL(b); }).catch(() => { s.url = s.zonk; }).finally(() => {
-    if (++nomnom == fizzlewump.length) {
-      gnorp.textContent = readyBit;
-      gnorp.style.cursor = "pointer";
-      gnorp.addEventListener("click", kerplunk);
-    }
-  });
+var wibble = 0, glorp = 1, seekd = false;
+var boop = new Audio();
+boop.volume = 0;
+
+boop.addEventListener("canplay", () => {
+  if (seekd) return;
+  seekd = true;
+  if (wibble == 0) boop.currentTime = 22;
 });
 
-function snagglePick() {
-  var noodles = [];
-  for (var q = 1; q < fizzlewump.length; q++) if (q != wibble) noodles.push(q);
-  if (!noodles.length) return fizzlewump.length > 1 ? wibble : 0;
-  for (var flop = 0; flop < 100000; flop++) {
-    var plonked = noodles.filter(q => Math.random() * 100 < fizzlewump[q].blargh);
-    if (plonked.length) return plonked[Math.floor(Math.random() * plonked.length)];
-  }
-  return noodles[0];
-}
-
 function swapBoop() {
-  wibble = snagglePick();
+  var w = fizzlewump.map((s, i) => i ? s.blargh : 0).filter((x, i) => i != wibble || !x);
+  var tot = 0, pick = 0, r;
+  var ws = fizzlewump.map((s, i) => (i && i != wibble) ? s.blargh : 0);
+  ws.forEach(x => { tot += x; });
+  r = Math.random() * tot;
+  for (pick = 1; pick < ws.length - 1; pick++) { r -= ws[pick]; if (r < 0) break; }
+  wibble = pick;
+  seekd = false;
   boop.volume = 0;
   boop.src = fizzlewump[wibble].url;
-  boop.play();
+  boop.play().catch(() => {});
 }
 boop.addEventListener("ended", swapBoop);
 wiggler.addEventListener("click", swapBoop);
 
 setInterval(() => {
-  if (!boop.duration) return;
+  if (!isFinite(boop.duration)) return;
   var zib = wibble == 0 ? 22 : 0, zab = wibble == 0 ? 0.5 : 2;
   var zub = Math.min(1, (boop.currentTime - zib) / zab, (boop.duration - boop.currentTime) / 2);
-  boop.volume = Math.max(0, glorp * fizzlewump[wibble].gurp * zub);
+  boop.volume = Math.min(1, Math.max(0, glorp * fizzlewump[wibble].gurp * zub));
 }, 50);
+
+var grabby = s => fetch(s.zonk).then(r => r.blob()).then(b => { s.url = URL.createObjectURL(b); }).catch(() => {});
+var nyoom = 0;
+var openSesame = () => {
+  if (nyoom++) return;
+  gnorp.textContent = yoink(clickyBits);
+  gnorp.style.cursor = "pointer";
+  gnorp.addEventListener("click", kerplunk);
+};
+setTimeout(openSesame, 1000);
+grabby(fizzlewump[0]).then(() => {
+  openSesame();
+  fizzlewump.slice(1).reduce((p, s) => p.then(() => grabby(s)), Promise.resolve());
+});
 
 function kerplunk() {
   gnorp.remove();
   boop.src = fizzlewump[0].url;
-  boop.play();
-  document.querySelectorAll("img").forEach(i => { i.src = i.getAttribute("src").split("?")[0] + "?" + Date.now(); });
+  boop.play().catch(() => {});
+  document.querySelectorAll("img").forEach(i => { i.src = i.dataset.g; });
   setTimeout(() => {
     var chunks = ["FRA", "CTA", "LU", "ST"], k = 0;
     var tock = setInterval(() => {
