@@ -22,7 +22,7 @@ img { max-width: 60vw; margin-bottom: 15vh; }
 </head>
 <body>
 
-<div id="gnorp" class="splat">click on me, pwetty plese :3</div>
+<div id="gnorp" class="splat">loading my page...</div>
 <div id="splunge" class="splat"><span id="flibber"></span></div>
 <div id="kablorp" class="splat"></div>
 
@@ -77,14 +77,44 @@ var fizzlewump = [
 ];
 var wibble = 0, glorp = 1;
 var boop = new Audio(fizzlewump[0].zonk);
-boop.currentTime = 22;
 boop.volume = 0;
 
 var slopFonts = ["'Space Grotesk'", "'Syne'", "'Archivo Black'"];
 var blipFont = slopFonts[Math.floor(Math.random() * slopFonts.length)];
-
 gnorp.style.fontFamily = blipFont;
 splunge.style.fontFamily = blipFont;
+
+var phrases = ["loading my page...", "getting all songs ready...", "nah, I'd load.", "loading the bangers...", "FORCING up the mouse to dance properly...", "you know what? I can just not talk to you.", "wait for it...", "fetching the goofy ahh songs...", "do NOT click yet...", "I SAID do NOT click yet...", "just a sec...", "loading 100% real..."];
+var clicks = ["click on me, pwetty plese :3", "TOUCH ME.", "press me.", "click me or else.", "do it.", "i know you want to click on me.", "touch me please.", "smash that text... me.", "poke me."];
+var phraseIdx = 0;
+var phraseTock = setInterval(() => {
+  gnorp.textContent = phrases[phraseIdx++ % phrases.length];
+}, 600);
+
+var loadCount = 0;
+fizzlewump.forEach(s => {
+  var tmp = new Audio();
+  tmp.src = s.zonk;
+  tmp.oncanplaythrough = () => {
+    loadCount++;
+    if (loadCount === fizzlewump.length) {
+      clearInterval(phraseTock);
+      gnorp.textContent = clicks[Math.floor(Math.random() * clicks.length)];
+      gnorp.style.color = "rgba(255, 255, 255, 0.8)";
+      gnorp.addEventListener("click", startTheShow);
+    }
+  };
+  tmp.onerror = () => {
+    loadCount++;
+    if (loadCount === fizzlewump.length) {
+      clearInterval(phraseTock);
+      gnorp.textContent = clicks[Math.floor(Math.random() * clicks.length)];
+      gnorp.style.color = "rgba(255, 255, 255, 0.8)";
+      gnorp.addEventListener("click", startTheShow);
+    }
+  };
+  tmp.load();
+});
 
 function snagglePick() {
   var noodles = [];
@@ -101,7 +131,13 @@ function swapBoop() {
   wibble = snagglePick();
   boop.volume = 0;
   boop.src = fizzlewump[wibble].zonk;
-  boop.currentTime = wibble == 0 ? 22 : 0;
+  boop.currentTime = 0;
+  if (wibble == 0) {
+    boop.addEventListener("loadedmetadata", function setTime() {
+      boop.currentTime = 22;
+      boop.removeEventListener("loadedmetadata", setTime);
+    });
+  }
   boop.play();
 }
 boop.addEventListener("ended", swapBoop);
@@ -109,15 +145,17 @@ wiggler.addEventListener("click", swapBoop);
 
 setInterval(() => {
   if (!boop.duration) return;
-  var zib = wibble == 0 ? 22 : 0, zab = wibble == 0 ? 0.5 : 2;
+  var zib = (wibble == 0 && boop.currentTime >= 20) ? 22 : 0, zab = wibble == 0 ? 0.5 : 2;
   var zub = Math.min(1, (boop.currentTime - zib) / zab, (boop.duration - boop.currentTime) / 2);
   boop.volume = Math.max(0, glorp * fizzlewump[wibble].gurp * zub);
 }, 50);
 
-gnorp.addEventListener("click", () => {
-  gnorp.remove();
+function startTheShow() {
+  gnorp.style.pointerEvents = "none";
+  boop.currentTime = 22;
   boop.play();
   setTimeout(() => {
+    gnorp.remove();
     var chunks = ["FRA", "CTA", "LU", "ST"], k = 0;
     var tock = setInterval(() => {
       flibber.textContent += chunks[k++];
@@ -133,7 +171,7 @@ gnorp.addEventListener("click", () => {
       }
     }, 150);
   }, 300);
-});
+}
 
 var zorbDay = new Date("2029-09-24T20:22:18Z").getTime();
 setInterval(() => {
