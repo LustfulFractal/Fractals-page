@@ -68,7 +68,7 @@ var fizzlewump = [
   { zonk: "Secret.mp3", blargh: 1, gurp: 0.9 },
   { zonk: "Faith.mp3", blargh: 15, gurp: 0.5 },
   { zonk: "Isaac.mp3", blargh: 10, gurp: 0.4 },
-  { zonk: "Macabre.mp3", blargh: 5, gurp: 0.5 },
+  { zonk: "Macarbe.mp3", blargh: 5, gurp: 0.5 },
   { zonk: "Sky.mp3", blargh: 10, gurp: 0.5 },
   { zonk: "World.mp3", blargh: 20, gurp: 0.4 },
   { zonk: "Drowned.mp3", blargh: 10, gurp: 0.6 },
@@ -78,8 +78,8 @@ var fizzlewump = [
 fizzlewump.forEach(s => { s.url = s.zonk; });
 
 var yoink = a => a[Math.floor(Math.random() * a.length)];
-var loadyBits = ["loading my page...", "getting all songs ready...", "nah, I'd load.", "uhhh ohhh uhhh...", "wait for it...", "viruses? Nahhhh...", "WAIT...", "Uhhh... You need to wait a little less than for The Pact realese!..."];
-var clickyBits = ["click on me, pwetty plese :3", "TOUCH ME.", "press me.", "c'mon, click on me!", "do it. click.", "rub my fat belly.", "poke me :3"];
+var loadyBits = ["loading my page...", "loading...", "nah, I'd load.", "uhhh ohhh uhhh...", "wait for it...", "viruses? Nahhhh...", "WAIT...", "Uhhh... You need to wait a little less than for The Pact realese!..."];
+var clickyBits = ["click on me, pwetty plese :3", "TOUCH ME.", "press me.", "stroke me.", "hit me.", "meet your m1 with me.", "brush me.", "poke me :3"];
 var blipFont = yoink(["'Space Grotesk'", "'Syne'", "'Archivo Black'"]);
 gnorp.style.fontFamily = splunge.style.fontFamily = blipFont;
 gnorp.textContent = yoink(loadyBits);
@@ -164,7 +164,7 @@ setInterval(() => {
 
 var wobbleData = [];
 document.querySelectorAll("#bonk h1, #bonk p, #bonk img:not(#wiggler)").forEach((el, i) => {
-  wobbleData.push({ el, speed: 0.0006 + (i % 5) * 0.00015, phase: i * 1.5, tilt: 1.2 + (i % 3) * 0.3, mx: 4 + (i % 4) * 2, my: 4 + (i % 3) * 2 });
+  wobbleData.push({ el, speed: 0.002 + (i % 5) * 0.00015, phase: i * 1.5, tilt: 1.2 + (i % 3) * 0.3, mx: 4 + (i % 4) * 2, my: 4 + (i % 3) * 2 });
 });
 (function floatyTime() {
   var now = performance.now();
@@ -177,6 +177,3 @@ document.querySelectorAll("#bonk h1, #bonk p, #bonk img:not(#wiggler)").forEach(
 </script>
 </body>
 </html>
-
-
-//jojo pocoloco.
