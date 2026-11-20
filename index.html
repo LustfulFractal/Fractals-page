@@ -27,19 +27,21 @@ img { max-width: 60vw; margin-bottom: 15vh; }
 <div id="kablorp" class="splat"></div>
 
 <main id="bonk">
-  <h1>Biography</h1>
-  <p>Scroll down (or press on mouse)</p>
+  <h1>Information</h1>
+  <p>Scroll/Swipe down (or press on mouse)</p>
   <img id="wiggler" data-g="gif1.gif">
   <h1>DNI:</h1>
-  <p>Homophobiaphobia, Trans, hyper-religious people, any taboo subjects (e.g. pedophilia, terrorism supporters), "vibe-coders", misandrists/misogynists, racists (not people who just say "nga" as a joke, but those who genuinely hate Black people)…</p>
+  <p>Queerphobiaphobes, hyper-religious people, people who defend or romanticize grooming, incest, or non-consensual dynamics, <br> people who glorify self-harm, eating disorders, or suicide, <br> people who support or promote taboo subjects (e.g. pedophilia, terrorism), "vibe-coders", misandrists/misogynists, and racists (not people who just say "nga" as a joke, but those who genuinely hate Black people)…</p>
   <p>...</p>
   <p>Please be kind and <strong>BLOCK me IMMEDIATELY</strong> if anything on my DNI list applies to you. If you <strong>MISUNDERSTOOD</strong> the DNI list, <strong>ASK ME</strong> about it (and I suspect there will be a <strong>LOT</strong> of misunderstandings…).</p>
   <img data-g="gif2.gif">
   <h1>RULES:</h1>
-  <p>NSFW in DMs / servers / groups / demos = <strong>Block</strong>.<br>
-  NSFW block is permanent for strangers, and lasts 1–10 hours for friends.<br>
-  (Nudity, NSFW references, and indirect NSFW similarities are all included.)<br>
+  <p>Sharing NSFW/NSFL content in DMs, servers, groups, or demos = Block.<br>
+  For strangers, the block is permanent. For friends, it lasts 1-10 hours.<br>
+  This includes: explicit nudity, references to NSFW/NSFL content, character artwork that is suggestive or fanservice-style, and anything that is indirectly NSFW.<br>
+  Not knowing the rules is not an excuse, and you can still be held responsible.<br>
   No exceptions.</p>
+  <p>The Great Clarification: Mild gore or blood from games is allowed. Artworks that is questionable but has no suggestive or fanservice elements is also allowed.</p>
   <img data-g="gif3.gif">
   <h1>ABOUT ME:</h1>
   <p>I'm a game dev and a hobbyist painter. I love playing different games and creating things.</p>
@@ -55,6 +57,12 @@ img { max-width: 60vw; margin-bottom: 15vh; }
   <p>...</p>
   <p>The end.</p>
   <img data-g="gif7.gif">
+  <p> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> </p>
+  <p> Site's ver: 2.5 </p>
+  <p> <br> <br> </p>
+  <p> Lust's recent comment this version: </p>
+  <p> "RRRAAAAAAAAAAAAAAAAAAAAAAHHH!!!!!!" </p>
+  <p> <br> <br> <br> <br> </p>
   <p id="shhhmoo"></p>
 </main>
 
@@ -62,8 +70,8 @@ img { max-width: 60vw; margin-bottom: 15vh; }
 var fizzlewump = [
   { zonk: "music.mp3", blargh: 100, gurp: 0.7 },
   { zonk: "High.mp3", blargh: 1, gurp: 0.5 },
-  { zonk: "BurgerSausce.mp3", blargh: 0.144, gurp: 1.0 },
-  { zonk: "Spooky.mp3", blargh: 20, gurp: 0.7 },
+  { zonk: "BurgerSausce.mp3", blargh: 0.444, gurp: 1.444 },
+  { zonk: "Spooky.mp3", blargh: 15, gurp: 0.7 },
   { zonk: "Halls.mp3", blargh: 10, gurp: 0.35 },
   { zonk: "Secret.mp3", blargh: 1, gurp: 0.9 },
   { zonk: "Faith.mp3", blargh: 15, gurp: 0.5 },
@@ -72,7 +80,15 @@ var fizzlewump = [
   { zonk: "Sky.mp3", blargh: 10, gurp: 0.5 },
   { zonk: "World.mp3", blargh: 20, gurp: 0.4 },
   { zonk: "Drowned.mp3", blargh: 10, gurp: 0.6 },
+  { zonk: "Dystension.mp3", blargh: 3, gurp: 0.6 },
+  { zonk: "FrostGround.mp3", blargh: 15, gurp: 0.6 },
+  { zonk: "John.mp3", blargh: 2, gurp: 0.6 },
   { zonk: "Light.mp3", blargh: 5, gurp: 0.5 },
+  { zonk: "Snake.mp3", blargh: 1, gurp: 0.5 },
+  { zonk: "LastDance.mp3", blargh: 2, gurp: 0.5 },
+  { zonk: "Abnormality.mp3", blargh: 1, gurp: 0.5 },
+  { zonk: "Bus.mp3", blargh: 15, gurp: 0.5 },
+  { zonk: "CantoI.mp3", blargh: 5, gurp: 0.5 },
   { zonk: "Devastation.mp3", blargh: 3, gurp: 0.6 }
 ];
 fizzlewump.forEach(s => { s.url = s.zonk; });
@@ -154,7 +170,7 @@ function kerplunk() {
   }, 300);
 }
 
-var zorbDay = new Date("2029-09-24T20:22:18Z").getTime();
+var zorbDay = new Date("2035-09-24T20:22:18Z").getTime();
 setInterval(() => {
   var grab = getSelection(), grabbed = shhhmoo.contains(grab.anchorNode) || shhhmoo.contains(grab.focusNode);
   var bleep = Math.max(0, Math.floor((zorbDay - Date.now()) / 1000));
